@@ -11,22 +11,23 @@ int main(){
         cout<<"------------- Gestion Hospitaliser -------------\n";
         cout<<"1 - Gestion des patients\n";
         cout<<"2 - Gestion des Medecins\n";
-        cout<<"4 - Quitter\n";
+        cout<<"3 - Quitter\n";
         do{
             cout<<"Taper votre choix: ";
             cin>>choix;
-        }while(choix>4 || choix <1);
+        }while(choix>3 || choix <1);
 
         switch(choix){
             case 1:
                 patient_menu();
             case 2:
                 medecin_menu();
-            case 4:
+            case 3:
                 exit(1);
         }
         cout<<"Voulez vous continue? (0/1): ";
         cin>>isTrue;
     }while(isTrue==1);
+    
     return 0;
 }
