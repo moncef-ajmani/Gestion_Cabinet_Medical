@@ -1,4 +1,5 @@
-#include<iostream>
+#ifndef PERSONNE_H_INCLUDED
+#define PERSONNE_H_INCLUDED
 using namespace std;
 
 class Personne{
@@ -32,4 +33,5 @@ class Personne{
     string getAdresse();
 
 };
-int Personne::c=0;
+
+#endif

@@ -1,5 +1,5 @@
 #include<iostream>
-#include"Patient.cpp"
+#include"../Patient/Patient.cpp"
 using namespace std;
 
 void patient_menu(){
@@ -16,7 +16,7 @@ void patient_menu(){
         do{
             cout<<"Taper votre choix: ";
             cin>>choix;
-        }while(choix>6 || choix <1);
+        }while(choix>7 || choix <1);
 
         switch(choix){
             case 1:
@@ -30,11 +30,12 @@ void patient_menu(){
                 break;
             case 4:
                 chercherPatient();
+                break;
             case 5:
                 afficherPatients();
                 break;
             case 6:
-                exit(1);
+                return;
         }
         cout<<"Voulez vous continue? (0/1): ";
         cin>>test;

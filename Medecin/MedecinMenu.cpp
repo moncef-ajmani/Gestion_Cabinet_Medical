@@ -1,5 +1,5 @@
 #include<iostream>
-#include"Medecin.cpp"
+#include"../Medecin/Medecin.cpp"
 using namespace std;
 
 void medecin_menu(){
@@ -36,7 +36,7 @@ void medecin_menu(){
                 afficherMedecins();
                 break;
             case 6:
-                exit(1);
+                return;
         }
         cout<<"Voulez vous continue? (0/1): ";
         cin>>test;

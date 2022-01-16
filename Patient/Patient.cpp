@@ -4,8 +4,8 @@
 #include<iomanip>
 #include<string>
 #include "Patient.h"
+#include"../utils/Message.cpp"
 using namespace std;
-
 
 // Constructers
 Patient::Patient(){}
@@ -30,7 +30,10 @@ string Patient::getDateNaissance(){
 void Patient::toString(){
     cout
         << left
-        << setw(20)
+        << setw(10)
+        << id
+        << left
+        << setw(10)
         <<cin
         << left
         << setw(20)
@@ -54,7 +57,7 @@ void Patient::toString(){
     cout<<endl;
 }
 
-vector<Patient> patients;
+
 
 void ajouterPatient(){
     string n,p,d,a,t,c;
@@ -73,8 +76,7 @@ void ajouterPatient(){
     cin>>t;
     Patient patient(c,n,p,d,t,a);
     patients.push_back(patient);
-    cout<<"Patient ajoute avec succes!!\n";
-
+    new Message("Patient ajoute avec succes");
 }
 void afficherPatients(){
     for(int i=1;i<120;i++){
@@ -137,10 +139,10 @@ void modifierPatient(){
             patient.setTele(t);
             patient.setAdresse(a);
             patient.setDateNaissance(d);
-            cout<<"Patient modifie avec succes!!\n";
+            new Message("Patient modifie avec succes");
         }
     }
-    cout<<"Patient introuvable\n";
+    new Message("Patient introuvable");
 }
 
 void supprimerPatient(){
@@ -151,12 +153,11 @@ void supprimerPatient(){
     for(Patient p:patients){
         if(p.getId()==id){
             patients.erase(patients.begin()+id-1);
-            cout<<"Patient supprime avec succes!!\n";
+            new Message("Patient supprime avec succes");
             return;
         }
     }
-    cout<<"Patient introuvable!!\n";
-
+    new Message("Patient introuvable");
 }
 void chercherPatient(){
     string CIN;
@@ -167,4 +168,15 @@ void chercherPatient(){
             patient.toString();
         }
     }
+}
+
+Patient getPatientById(int id){
+    Patient patient;
+    for(Patient p : patients){
+        if(p.getId()==id){
+            patient = p;
+            break; 
+        }
+    }
+    return patient;
 }

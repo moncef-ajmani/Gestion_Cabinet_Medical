@@ -108,7 +108,7 @@ void ajouterMedecin(){
 
     Medecin medecin(c,n,p,t,a,s);
     medecins.push_back(medecin);
-    cout<<"Medecin ajoute avec succes!!\n";
+    new Message("Medecin ajoute avec succes");
 }
 
 void modifierMedecin(){
@@ -132,10 +132,10 @@ void modifierMedecin(){
             medecin.setPrenom(p);
             medecin.setTele(t);
             medecin.setAdresse(a);
-            cout<<"medecin modifie avec succes!!\n";
+            new Message("Medecin modifie avec succes");
         }
     }
-    cout<<"medecin introuvable\n";
+    new Message("Medecin introuvable");
 }
 
 void supprimerMedecin(){
@@ -146,12 +146,11 @@ void supprimerMedecin(){
     for(Medecin medecin:medecins){
         if(medecin.getId()==id){
             medecins.erase(medecins.begin()+id-1);
-            cout<<"medecin supprime avec succes!!\n";
+            new Message("Medecin supprime avec succes");
             return;
         }
     }
-    cout<<"medecin introuvable!!\n";
-
+    new Message("Medecin introuvable");
 }
 void chercherMedecin(){
     string CIN;
@@ -162,6 +161,16 @@ void chercherMedecin(){
             medecin.toString();
         }
     }
-    cout<<"medecin introuvable!!\n";
+    new Message("medecin supprime avec succes");
 }
 
+Medecin getMedecinById(int id){
+    Medecin medecin;
+    for(Medecin m:medecins){
+        if(m.getId()==id){
+            medecin = m;
+            break; 
+        }
+    }
+    return medecin;
+}

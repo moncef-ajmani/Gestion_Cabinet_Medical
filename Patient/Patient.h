@@ -1,4 +1,5 @@
-#include<iostream>
+#ifndef PATIENT_H_INCLUDED
+#define PATIENT_H_INCLUDED
 #include"../Personne/Personne.h"
 using namespace std;
 
@@ -14,3 +15,5 @@ class Patient:public Personne{
 
     void toString();
 };
+vector<Patient> patients;
+#endif

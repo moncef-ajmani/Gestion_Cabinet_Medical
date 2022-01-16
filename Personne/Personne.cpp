@@ -3,6 +3,8 @@
 #include"Personne.h"
 using namespace std;
 
+int Personne::c=0;
+
 // Constructers & Destucters
 Personne::Personne(){
     id=++c;
