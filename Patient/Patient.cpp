@@ -7,6 +7,8 @@
 #include"../utils/Message.cpp"
 using namespace std;
 
+
+
 // Constructers
 Patient::Patient(){}
 Patient::Patient(string c,string n, string p, string d, string t, string a){
@@ -57,29 +59,8 @@ void Patient::toString(){
     cout<<endl;
 }
 
-
-
-void ajouterPatient(){
-    string n,p,d,a,t,c;
-    cout<<"Donner le nom: ";
-    cin>>n;
-    cout<<"Donner le penom: ";
-    cin>>p;
-    cout<<"Donner le cin: ";
-    cin>>c;
-    cout<<"Donner la date de naissance (dd/mm/yyyy): ";
-    cin>>d;
-    cin.ignore();
-    cout<<"Donner l'adresse: ";
-    getline(cin,a);
-    cout<<"Donner le tele: ";
-    cin>>t;
-    Patient patient(c,n,p,d,t,a);
-    patients.push_back(patient);
-    new Message("Patient ajoute avec succes");
-}
-void afficherPatients(){
-    for(int i=1;i<120;i++){
+void tablePatientHeader(){
+for(int i=1;i<120;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -110,6 +91,29 @@ void afficherPatients(){
         cout<<"-";
     }
     cout<<endl;
+}
+
+void ajouterPatient(){
+    string n,p,d,a,t,c;
+    cout<<"Donner le nom: ";
+    cin>>n;
+    cout<<"Donner le penom: ";
+    cin>>p;
+    cout<<"Donner le cin: ";
+    cin>>c;
+    cout<<"Donner la date de naissance (dd/mm/yyyy): ";
+    cin>>d;
+    cin.ignore();
+    cout<<"Donner l'adresse: ";
+    getline(cin,a);
+    cout<<"Donner le tele: ";
+    cin>>t;
+    Patient patient(c,n,p,d,t,a);
+    patients.push_back(patient);
+    new Message("Patient ajoute avec succes");
+}
+void afficherPatients(){
+    tablePatientHeader();
     for(Patient p : patients){
         p.toString();
     }
@@ -120,7 +124,7 @@ void modifierPatient(){
     afficherPatients();
     cout<<"Donner ID: ";
     cin>>id;
-    for(Patient patient:patients){
+    for(Patient &patient:patients){
         if(patient.getId()==id){
             string n,p,d,a,t;
             cout<<"Donner le nom: ";
@@ -140,22 +144,24 @@ void modifierPatient(){
             patient.setAdresse(a);
             patient.setDateNaissance(d);
             new Message("Patient modifie avec succes");
+            return;
         }
     }
     new Message("Patient introuvable");
 }
 
 void supprimerPatient(){
-    int id;
+    int id,i=0;
     afficherPatients();
     cout<<"Donner ID: ";
     cin>>id;
     for(Patient p:patients){
         if(p.getId()==id){
-            patients.erase(patients.begin()+id-1);
+            patients.erase(patients.begin()+i);
             new Message("Patient supprime avec succes");
             return;
         }
+        i++;
     }
     new Message("Patient introuvable");
 }
@@ -165,7 +171,9 @@ void chercherPatient(){
     cin>>CIN;
     for(Patient patient: patients){
         if(patient.getCIN()==CIN){
+            tablePatientHeader();
             patient.toString();
+            break;
         }
     }
 }

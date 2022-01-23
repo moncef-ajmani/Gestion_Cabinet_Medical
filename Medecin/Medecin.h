@@ -15,5 +15,5 @@ class Medecin:public Personne{
 
     void toString();
 };
-
+vector<Medecin> medecins;
 #endif

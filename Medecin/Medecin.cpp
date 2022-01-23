@@ -1,7 +1,11 @@
 #include<iostream>
 #include"Medecin.h"
+#include"../utils/tableHeader.cpp"
 using namespace std;
 
+// Table Header 
+string header[] = {"ID","CIN","Nom","Prenom","Tele","Adresse","Specialite"};
+int size = *(&header +1) - header;
 // Contructors
 Medecin::Medecin(){}
 Medecin::Medecin(string c,string n,string p,string t,string a,string s){
@@ -24,10 +28,10 @@ string Medecin::getSpecialite(){
 void Medecin::toString(){
     cout
         << left
-        << setw(10)
+        << setw(20)
         <<id
         << left
-        << setw(10)
+        << setw(20)
         <<cin
         << left
         << setw(20)
@@ -45,46 +49,14 @@ void Medecin::toString(){
         << setw(20)
         <<specialite
         <<endl;
-    for(int i=1;i<120;i++){
+    for(int i=1;i<size*20;i++){
         cout<<"-";
     }
     cout<<endl;
 }
 
-vector<Medecin> medecins;
-
 void afficherMedecins(){
-    for(int i=1;i<120;i++){
-        cout<<"-";
-    }
-    cout<<endl;
-    cout
-        << left
-        << setw(10)
-        << "ID"
-        << left
-        << setw(10)
-        << "CIN"
-        << left
-        << setw(20)
-        << "Nom"
-        << left
-        << setw(20)
-        << "Prenom"
-        << left
-        << setw(20)
-        << "Tele"
-        << left
-        << setw(20)
-        << "Adresse"
-        << left
-        << setw(20)
-        << "Specialite"
-        <<endl;
-    for(int i=1;i<120;i++){
-        cout<<"-";
-    }
-    cout<<endl;
+    tableHeader(header,size);
     for(Medecin medecin : medecins){
         medecin.toString();
     }
@@ -116,9 +88,9 @@ void modifierMedecin(){
     afficherMedecins();
     cout<<"Donner ID: ";
     cin>>id;
-    for(Medecin medecin:medecins){
+    for(Medecin &medecin:medecins){
         if(medecin.getId()==id){
-            string n,p,d,a,t;
+            string n,p,d,a,t,s;
             cout<<"Donner le nom: ";
             cin>>n;
             cout<<"Donner le penom: ";
@@ -128,40 +100,33 @@ void modifierMedecin(){
             getline(cin,a);
             cout<<"Donner le tele: ";
             cin>>t;
+            cout<<"Donner Specialite: ";
+            cin>>s;
             medecin.setNom(n);
             medecin.setPrenom(p);
             medecin.setTele(t);
             medecin.setAdresse(a);
+            medecin.setSpecialite(s);
             new Message("Medecin modifie avec succes");
-        }
-    }
-    new Message("Medecin introuvable");
-}
-
-void supprimerMedecin(){
-    int id;
-    afficherMedecins();
-    cout<<"Donner ID: ";
-    cin>>id;
-    for(Medecin medecin:medecins){
-        if(medecin.getId()==id){
-            medecins.erase(medecins.begin()+id-1);
-            new Message("Medecin supprime avec succes");
             return;
         }
     }
     new Message("Medecin introuvable");
 }
+
+
 void chercherMedecin(){
     string CIN;
     cout<<"Donner CIN: ";
     cin>>CIN;
     for(Medecin medecin: medecins){
         if(medecin.getCIN()==CIN){
+            tableHeader(header,size);
             medecin.toString();
+            break;
         }
     }
-    new Message("medecin supprime avec succes");
+
 }
 
 Medecin getMedecinById(int id){

@@ -27,8 +27,7 @@ class Personne{
     // Getters 
     int getId();
     string getCIN();
-    string getNom();
-    string getPrenom();
+    string getNomComplet();
     string getTele();
     string getAdresse();
 

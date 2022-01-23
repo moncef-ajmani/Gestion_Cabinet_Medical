@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include"Consultation.h"
+// #include"../utils/tableHeader.cpp"
 using namespace std;
 
 
@@ -62,10 +63,10 @@ void Consultation::toString(){
         << id
         << left
         << setw(20)
-        << medecin.getNom()<<" "<<medecin.getPrenom()
+        << medecin.getNomComplet()
         << left
         << setw(20)
-        << patient.getNom()<<" "<<patient.getPrenom()
+        << patient.getNomComplet()
         << left
         << setw(20)
         << date
@@ -84,34 +85,6 @@ void Consultation::toString(){
 
 
 void afficherConsultations(){
-    for(int i=1;i<120;i++){
-        cout<<"-";
-    }
-    cout<<endl;
-    cout
-        << left
-        << setw(10)
-        << "ID"
-        << left
-        << setw(20)
-        << "Medecin"
-        << left
-        << setw(20)
-        << "Patient"
-        << left
-        << setw(20)
-        << "Date"
-        << left
-        << setw(20)
-        << "Time"
-        << left
-        << setw(10)
-        << "Montant"
-        <<endl;
-    for(int i=1;i<100;i++){
-        cout<<"-";
-    }
-    cout<<endl;
     for(Consultation consultation : consultations){
         consultation.toString();
     }
@@ -123,20 +96,23 @@ void ajouterConsultation(){
     int id;
     string date,time;
     float montant;
-
+    if(!patients.size() || !medecins.size()){
+        new Message("Medecin ou Patient introuvables!!!");
+        return;
+    }
     cout<<"Tableau des patients:\n";
     afficherPatients();
     cout<<"Donner ID du patient: ";
     cin>> id;
     p = getPatientById(id);
-    cout<<"Tableau des patients:\n";
+    cout<<"Tableau des medecins:\n";
     afficherMedecins();
     cout<<"Donner ID du medecin: ";
     cin>> id;
     m = getMedecinById(id);
     cout<<"Donner la date (dd/mm/yyyy): ";
     cin>>date;
-    cout<<"Donner l'heur: (hh:mm)";
+    cout<<"Donner l'heur: (hh:mm): ";
     cin>>time;
     cout<<"Donner le montant: ";
     cin>>montant;
@@ -157,7 +133,7 @@ void modifierConsultation(){
     cout<<"Donner ID: ";
     cin>>id;
 
-    for(Consultation c:consultations){
+    for(Consultation &c:consultations){
         if(c.getId()==id){
             int idd;
             cout<<"Tableau des patients:\n";
@@ -188,16 +164,17 @@ void modifierConsultation(){
 }
 
 void supprimerConsultation(){
-    int id;
+    int id,i=0;
     afficherConsultations();
     cout<<"Donner ID: ";
     cin>>id;
     for(Consultation c:consultations){
         if(c.getId()==id){
-            consultations.erase(consultations.begin()+id-1);
+            consultations.erase(consultations.begin()+i);
             new Message("Consultation supprime avec succes");
             return;
         }
+        i++;
     }
     new Message("Consultation introuvable");
 
@@ -205,6 +182,8 @@ void supprimerConsultation(){
 
 void getConsultationsByPatientCin(){
     string CIN;
+    cout<<"Donner CIN du Mdecin: ";
+    cin>>CIN;
     for(Consultation c:consultations){
         if(c.getPatient().getCIN()==CIN){
             c.toString();
@@ -214,6 +193,8 @@ void getConsultationsByPatientCin(){
 
 void getConsultationsByMedecinCin(){
     string CIN;
+    cout<<"Donner CIN du Mdecin: ";
+    cin>>CIN;
     for(Consultation c:consultations){
         if(c.getMedecin().getCIN()==CIN){
             c.toString();

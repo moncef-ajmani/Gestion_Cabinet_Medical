@@ -39,12 +39,10 @@ int Personne::getId(){
 string Personne::getCIN(){
     return cin;
 }
-string Personne::getNom(){
-    return nom;
+string Personne::getNomComplet(){
+    return nom+" "+prenom;
 }
-string Personne::getPrenom(){
-    return prenom;
-}
+
 string Personne::getTele(){
     return tele;
 }

@@ -10,7 +10,7 @@ void medecin_menu(){
         cout<<"------------- Gestion des medecins -------------\n";
         cout<<"1 - Ajouter un medecin\n";
         cout<<"2 - Modifier un medecin\n";
-        cout<<"3 - Supprimer un medecin\n";
+        cout<<"3 - Afficher les medecins\n";
         cout<<"4 - Chercher un medecin par CIN\n";
         cout<<"5 - Affiche list des medecins\n";
         cout<<"6 - Quitter\n";
@@ -27,7 +27,7 @@ void medecin_menu(){
                 modifierMedecin();
                 break;
             case 3:
-                supprimerMedecin();
+                afficherMedecins();
                 break;
             case 4:
                 chercherMedecin();

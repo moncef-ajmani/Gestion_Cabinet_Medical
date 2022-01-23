@@ -10,15 +10,14 @@ void consultation_menu(){
         cout<<"------------- Gestion des consultation -------------\n";
         cout<<"1 - Ajouter une consultation\n";
         cout<<"2 - Modifier une consultation\n";
-        cout<<"3 - Supprimer une consultation\n";
-        cout<<"4 - Afficher les consultations\n";
-        cout<<"5 - Filtrer les consultation par CIN du medecin \n";
-        cout<<"6 - Filtrer les consultation par CIN du patient \n";
-        cout<<"7 - Quitter\n";
+        cout<<"3 - Afficher les consultations\n";
+        cout<<"4 - Filtrer les consultation par CIN du medecin \n";
+        cout<<"5 - Filtrer les consultation par CIN du patient \n";
+        cout<<"6 - Quitter\n";
         do{
             cout<<"Taper votre choix: ";
             cin>>choix;
-        }while(choix>7 || choix <1);
+        }while(choix>6 || choix <1);
 
         switch(choix){
             case 1:
@@ -28,18 +27,15 @@ void consultation_menu(){
                 modifierConsultation();
                 break;
             case 3:
-                supprimerConsultation();
-                break;
-            case 4:
                 afficherConsultations();
                 break;
-            case 5:
+            case 4:
                 getConsultationsByMedecinCin();
                 break;
-            case 6:
+            case 5:
                 getConsultationsByPatientCin();
                 break;
-            case 7:
+            case 6:
                 return;
         }
         cout<<"Voulez vous continue? (0/1): ";
